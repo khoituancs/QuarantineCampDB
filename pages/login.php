@@ -43,7 +43,7 @@
                     // If validation succeeds, allow the form to submit via AJAX
                     var formData = new FormData(document.getElementById('login_form'));
                     var xhr = new XMLHttpRequest();
-                    xhr.open('POST', '/DB/pages/login_processing.php', true);
+                    xhr.open('POST', '/DB/services/login_processing.php', true);
                     xhr.withCredentials = true;
 
                     xhr.onreadystatechange = function () {
