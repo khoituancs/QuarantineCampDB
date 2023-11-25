@@ -1,5 +1,5 @@
-<link rel="stylesheet"  href="/DB/css/insert_patient.css"> <!-- original path: /qc/css/insert_patient.css -->
-<h3 class="title text-center p-2">Insert New Patient Record</h3>
+<link rel="stylesheet"  href="<?= $HTML_PATH ?>/css/insert_patient.css">
+<h3 class="title text-center p-2 text-uppercase">Insert New Patient Record</h3>
 <p class="description text-center">Please provide the following information about the new patient</p>
 
 

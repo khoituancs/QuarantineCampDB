@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg sticky-top navbar-light shadow-sm navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand " href="/qc/index.php"><strong>Quarantine Camp Group 8</strong></a>
+    <a class="navbar-brand " href="/QuarantineCampDB/index.php"><strong>Quarantine Camp Group 8</strong></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,21 +12,21 @@
     <div class=" collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-uppercase" href="/qc/index.php?page=home">Home</a>
+          <a class="nav-link text-uppercase" href="/QuarantineCampDB/index.php?page=home">Home</a>
         </li>
         <?php if (isset($_SESSION["authenticated"])) : ?>
           <li class="nav-item">
-              <a class="nav-link text-uppercase" href="/qc/index.php?page=search_patient">Search</a>
+              <a class="nav-link text-uppercase" href="/QuarantineCampDB/index.php?page=search_patient">Search</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link text-uppercase" href="/qc/index.php?page=insert_patient">Insert</a>
+              <a class="nav-link text-uppercase" href="/QuarantineCampDB/index.php?page=insert_patient">Insert</a>
           </li>          
         <?php else : ?>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" href="/qc/index.php?page=login">Login</a>
+            <a class="nav-link text-uppercase" href="/QuarantineCampDB/index.php?page=login">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" href="/qc/index.php?page=register">Register</a>
+            <a class="nav-link text-uppercase" href="/QuarantineCampDB/index.php?page=register">Register</a>
           </li>
         <?php endif; ?>
       </ul>

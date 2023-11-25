@@ -2,6 +2,6 @@
     session_start();
     session_unset();
     session_destroy();
-    header("Location: /DB/index.php");
+    header("Location: " . $HTML_PATH . "/index.php?page=home");
     exit;
 ?>
