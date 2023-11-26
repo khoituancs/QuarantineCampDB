@@ -37,16 +37,17 @@
         <div class="col-xxl-auto ms-auto me-5 align-self-center">
             <div class="row justify-content-center">
                 <?php
-                    if(isset($_SESSION['user_id'])){ echo
-                        '<div class="col-xxl-auto align-self-center">
+                    if(isset($_SESSION['user_id'])) { 
+                        echo'
+                        <div class="col-xxl-auto align-self-center">
                             <a href="' . $HTML_PATH . '/pages/logout.php">
                                 <button type="button" class="button-login">
                                 Logout
                                 </button>
                             </a>
                         </div>';
-                        } else{ echo
-                        '
+                    } else { 
+                        echo'
                         <div class="col-xxl-auto align-self-center">
                             <a href="' . $HTML_PATH . '/index.php?page=register">
                                 <button type="button" class="button-signup">
@@ -60,9 +61,8 @@
                                 Login
                                 </button>
                             </a>
-                        </div>
-                        ';
-                        }
+                        </div>';
+                    }
                 ?>
             </div>
         </div>

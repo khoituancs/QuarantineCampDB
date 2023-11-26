@@ -48,3 +48,7 @@
     <button class="btn">Search</button>
 </form>
 <p> </p>
+
+<?php
+    include_once('components/modal.php');
+?>
