@@ -11,19 +11,17 @@
             include_once("config.php");
             include_once($PHP_PATH . "/components/navbar.php");
         ?>
-        <div class="container">
-            <?php
-                if (!empty($_GET['page'])) {
-                    $page = $_GET['page'];
-                } else {
-                    header("Location: " . $HTML_PATH . "/index.php?page=home");
-                }
-                if (file_exists($PHP_PATH . "/pages/$page.php")) {
-                    include_once( $PHP_PATH . "/pages/$page.php");
-                } else {
-                    include_once( $PHP_PATH . "/pages/404.php");
-                }
-            ?>
-        </div>
+        <?php
+            if (!empty($_GET['page'])) {
+                $page = $_GET['page'];
+            } else {
+                header("Location: " . $HTML_PATH . "/index.php?page=home");
+            }
+            if (file_exists($PHP_PATH . "/pages/$page.php")) {
+                include_once( $PHP_PATH . "/pages/$page.php");
+            } else {
+                include_once( $PHP_PATH . "/pages/404.php");
+            }
+        ?>
     </body>
 </html>
