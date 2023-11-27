@@ -40,7 +40,7 @@
                     if(isset($_SESSION['user_id'])) { 
                         echo'
                         <div class="col-xxl-auto align-self-center">
-                            <a href="' . $HTML_PATH . '/pages/logout.php">
+                            <a href="' . $HTML_PATH . '/index.php?page=logout">
                                 <button type="button" class="button-login">
                                 Logout
                                 </button>
