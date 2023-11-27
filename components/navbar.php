@@ -3,7 +3,7 @@
 ?> 
 <link rel="stylesheet" href="<?= $HTML_PATH ?>/css/navbar_style.css">
 
-<div class="container-fluid text-center" style="background-image: linear-gradient(to right, #ed1b2e,#fde7e9);">
+<div class="container-fluid text-center py-1" style="background-image: linear-gradient(to right, #ed1b2e,#fde7e9);">
     <div class="row">
         <div class="col-xxl-auto first-class align-self-center">
             <a href="index.php">
@@ -40,7 +40,7 @@
                     if(isset($_SESSION['user_id'])) { 
                         echo'
                         <div class="col-xxl-auto align-self-center">
-                            <a href="' . $HTML_PATH . '/pages/logout.php">
+                            <a href="' . $HTML_PATH . '/index.php?page=logout">
                                 <button type="button" class="button-login">
                                 Logout
                                 </button>
