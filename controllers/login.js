@@ -1,5 +1,5 @@
 
-var root_login = '/DB'; // config.php nhu cut
+var root_login = "/QuarantineCampDB"; // config.php nhu cut
 
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("showPass").addEventListener("change", function() {
