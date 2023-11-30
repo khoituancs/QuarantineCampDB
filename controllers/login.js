@@ -1,6 +1,4 @@
 
-import "../config.php";
-
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("showPass").addEventListener("change", function() {
         var passwordInput = document.getElementById("password");
@@ -33,7 +31,7 @@ function submitForm() {
         // If validation succeeds, allow the form to submit via AJAX
         var formData = new FormData(document.getElementById('login_form'));
         var xhr = new XMLHttpRequest();
-        xhr.open('POST',   '<?= $HTML_PATH?> /services/login_processing.php', true);
+        xhr.open('POST',  '/services/login_processing.php', true);
         xhr.withCredentials = true;
 
         xhr.onreadystatechange = function () {
@@ -47,7 +45,7 @@ function submitForm() {
                     }
                     else if (xhr.responseText.trim() == 'Login successful!') {
                         // Redirect to index.php when login is successful
-                        window.location.href ='<?= $HTML_PATH?>/index.php';
+                        window.location.href = '/index.php';
                     }
                     else {
                         // Display the response from login_processing.php
