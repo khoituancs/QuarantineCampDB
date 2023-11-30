@@ -11,7 +11,7 @@
     <p class="description text-center">Look up patient information by filling out the following fields</p>
 
 
-    <form class="search-form container border border-dark rounded p-3" onsubmit="return false;">
+    <form class="search-form container border border-dark rounded p-3" id="search_form" method="post" onsubmit="handle_query();return false;">
         <div class="row">
             <div class="form-group col-12">
                 <label class="control-label" for="full_name">Full name</label>
@@ -50,9 +50,9 @@
                 </select>
             </div>
         </div>
-        <?php
-            include_once('components/search_result.php');
-        ?>
         <button class="btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Search</button>
     </form>
+    <?php
+        include_once('components/search_result.php');
+    ?>
 </div>
