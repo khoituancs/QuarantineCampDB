@@ -1,3 +1,9 @@
+<?php
+    if (!isset($_SESSION["user_id"])){
+        header("Location: " . $HTML_PATH . "/index.php?page=login");
+    }
+?>
+<script src="<?= $HTML_PATH ?>/controllers/search.js"></script>
 <div class="container">
     <link rel="stylesheet" href="<?= $HTML_PATH ?>/css/search_patient.css">
 
@@ -44,13 +50,9 @@
                 </select>
             </div>
         </div>
-
-
-        <button class="btn">Search</button>
+        <?php
+            include_once('components/search_result.php');
+        ?>
+        <button class="btn" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Search</button>
     </form>
-    <p> </p>
-
-    <?php
-        include_once('components/modal.php');
-    ?>
 </div>

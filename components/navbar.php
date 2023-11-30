@@ -28,7 +28,7 @@
                     </a>
                 </div>
                 <div class="col-xxl-auto align-self-center">
-                <a href="<?= $HTML_PATH ?>/index.php?page=moreInfo.php">
+                <a href="<?= $HTML_PATH ?>/index.php?page=moreinfo">
                         More Information
                     </a>
                 </div>
@@ -39,6 +39,22 @@
                 <?php
                     if(isset($_SESSION['user_id'])) { 
                         echo'
+                        <div class="col-xxl-auto align-self-center">
+                            <div class="dropdown">
+                                <button class="button-login dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ' . $_SESSION['username'] . '
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="ms-3" style="color: #7f181b;">
+                                            User ID: '. $_SESSION['user_id'] . ' <br>
+                                            Username: '. $_SESSION['username'] .' <br>
+                                            User Level: '. $_SESSION['user_level'].'
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="col-xxl-auto align-self-center">
                             <a href="' . $HTML_PATH . '/index.php?page=logout">
                                 <button type="button" class="button-login">

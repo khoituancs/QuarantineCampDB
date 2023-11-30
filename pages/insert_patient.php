@@ -1,3 +1,8 @@
+<?php
+    if (!isset($_SESSION["user_id"])){
+        header("Location: " . $HTML_PATH . "/index.php?page=login");
+    }
+?>
 <div class="container">
     <link rel="stylesheet"  href="<?= $HTML_PATH ?>/css/insert_patient.css">
     <h3 class="title text-center p-2 text-uppercase">Insert New Patient Record</h3>
