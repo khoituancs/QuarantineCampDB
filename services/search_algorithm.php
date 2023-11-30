@@ -13,10 +13,7 @@
     }
 ?>
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
-    $database = "OnlineStore";
+    include_once ("../config.php");
     
     // Create a connection to the MySQL server
     $conn = new mysqli($servername, $username, $password, $database);
