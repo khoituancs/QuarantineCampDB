@@ -26,12 +26,12 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    if (isset($_POST["products"])){
-        $product_name = $_POST["products"];
+    if (isset($_POST["full_name"])){
+        $product_name = $_POST["full_name"];
         if ($product_name === "all"){
             $sql = "SELECT * FROM products";
         } else{
-            $sql = "SELECT * FROM products WHERE name='$product_name'";
+            $sql = "SELECT * FROM products WHERE name='%$product_name%'";
         }
 
         // Execute the query

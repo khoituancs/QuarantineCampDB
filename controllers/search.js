@@ -1,12 +1,11 @@
-
-var root_login = '/DB'; // config.php nhu cut
+import "../config.php";
 
 function handle_query() {
-    var query = document.getElementById('products').value;
+    // var query = document.getElementById('products').value;
     // If validation succeeds, allow the form to submit via AJAX
-    var formData = new FormData(document.getElementById('products_form')); // change to form id
+    var formData = new FormData(document.getElementById('search_form')); // change to form id
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', root_login + '/services/search_processing.php', true);
+    xhr.open('POST', '<?= $HTML_PATH?>/services/search_processing.php', true);
     xhr.withCredentials = true;
 
     xhr.onreadystatechange = function () {
@@ -19,7 +18,7 @@ function handle_query() {
     };
     xhr.send(formData);
 }
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
     var productsInput = document.getElementById('products'); //input
     var productList = document.getElementById('productList'); //live search
 
@@ -78,3 +77,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+*/
