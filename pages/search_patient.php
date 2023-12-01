@@ -3,7 +3,7 @@
         header("Location: " . $HTML_PATH . "/index.php?page=login");
     }
 ?>
-<script src="<?= $HTML_PATH ?>/controllers/search.js"></script>
+<script type="module" src="<?= $HTML_PATH ?>/controllers/search.js"></script>
 <div class="container">
     <link rel="stylesheet" href="<?= $HTML_PATH ?>/css/search_patient.css">
 
