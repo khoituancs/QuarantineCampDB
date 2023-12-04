@@ -4,7 +4,7 @@ function handle_query() {
     // If validation succeeds, allow the form to submit via AJAX
     var formData = new FormData(document.getElementById('search_form')); // change to form id
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', path+'/services/search_processing.php', true);
+    xhr.open('POST', path+'/services/dbconnect.php', true);
     xhr.withCredentials = true;
 
     xhr.onreadystatechange = function () {

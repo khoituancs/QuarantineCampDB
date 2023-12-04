@@ -1,10 +1,10 @@
 <?php
-
+phpinfo();
     $host = "localhost"; // Change this to your PostgreSQL server host if it's not on the same machine
     $port = "5432"; // Change this to your PostgreSQL server port if it's different
-    $username = "stuti2309";
-    $password = "stuti2309";
-    $dbname = "qc";
+    $username = "postgre";
+    $password = "azthong146";
+    $dbname = "QuarantineCampDB";
 
     // Establish a connection to the PostgreSQL database
     $db_connection = pg_connect("host=$host port=$port user=$username password=$password dbname=$dbname");
