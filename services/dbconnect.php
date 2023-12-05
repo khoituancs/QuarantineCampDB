@@ -1,5 +1,4 @@
 <?php
-phpinfo();
     $host = "localhost"; // Change this to your PostgreSQL server host if it's not on the same machine
     $port = "5432"; // Change this to your PostgreSQL server port if it's different
     $username = "postgre";

@@ -31,25 +31,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="container-fluid px-5 table-responsive">
-            <table class="table table-light table-striped table-hover table-bordered">
-                <caption><div>Choose patient and click "View" to view patient info</div></caption>
-                <thead>
-                    <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody id="table_content">
-                    
-                </tbody>
-            </table>
+        <div class="container-fluid px-5 table-responsive" id="table_content">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">View</button>
       </div>
     </div>
   </div>
