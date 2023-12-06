@@ -13,7 +13,11 @@
     }
 
     // Query to select all patients from the "patient" table
-    $query = "SELECT * FROM personnel";
+    $query = "
+    SELECT p.patient_number, p.fullname, p.phone, pc.comorbidity
+    FROM patient as p
+    JOIN patient_comorbidity as pc ON p.patient_number = pc.patient_number;
+    ";
     $result = $mysqli->query($query);
 
     // Check if the query was successful
@@ -22,44 +26,42 @@
     }
 
     // Display the results in HTML
-    $row = $result->fetch_assoc();
-    $columnNames = array_keys($row);
     echo '
     <table class="table table-light table-striped table-hover table-bordered">
     <caption class="caption-top"><div>Click "View" to view patient info</div></caption>
     <thead>
         <tr>
-    ';
-    foreach ($columnNames as $columnName) {
-        echo "<th>$columnName</th>";
-    }
-    echo "<th>View info</th>";
-    echo "
+            <th>Full Name</th>
+            <th>Phone Number</th>
+            <th>Comorbidities</th>
+            <th>View information</th>
         </tr>
     </thead>
-    ";
+    ';
 
     // Fetch and display each row of the result set
-    $result->data_seek(0);
     echo '
-        <tbody>
+    <tbody>
     ';
     while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-
-        foreach ($columnNames as $columnName) {
-            echo "<td>{$row[$columnName]}</td>";
-        }
         echo '
-        <td>
-            <button class="btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">View</button>
-        </td>
+        <tr>
+            <td>' . $row["fullname"] . '</td>
+            <td>' . $row["phone"] . '</td>
+            <td>' . $row["comorbidity"] . '</td>
+            <td>
+                <div class="row mx-1 pb-1">
+                <button class="btn" id="'.$row["patient_number"].'" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" onclick="">View testing</button>
+                </div>
+                <div class="row mx-1">
+                <button class="btn" id="'.$row["patient_number"].'" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" onclick="">View full</button>
+                </div>
+            </td>
+        </tr>
         ';
-        echo "</tr>";
     }
-
     echo "
-        </tbody>
+    </tbody>
     </table>
     ";
 

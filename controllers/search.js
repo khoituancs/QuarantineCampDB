@@ -17,6 +17,12 @@ function handle_query() {
     };
     xhr.send(formData);
 }
+
+$( function() {
+    $( "#admission_date" ).datepicker({
+        dateFormat: 'dd/mm/yy',
+    });
+} );
 /*document.addEventListener('DOMContentLoaded', function () {
     var productsInput = document.getElementById('products'); //input
     var productList = document.getElementById('productList'); //live search

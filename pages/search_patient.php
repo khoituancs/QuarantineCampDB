@@ -3,6 +3,8 @@
         header("Location: " . $HTML_PATH . "/index.php?page=login");
     }
 ?>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="<?= $HTML_PATH ?>/controllers/search.js"></script>
 <div class="container">
     <link rel="stylesheet" href="<?= $HTML_PATH ?>/css/search_patient.css">
@@ -15,7 +17,7 @@
         <div class="row">
             <div class="form-group col-12">
                 <label class="control-label" for="full_name">Full name</label>
-                <input type="text" id="full_name" name="full_name" class="form-control">
+                <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Nguyen Van A">
             </div>
         </div>
 
@@ -29,8 +31,8 @@
 
             <div class="form-group col-6">
                 <label class="control-label" for="admission_date">Admission date</label>
-                <input type="date" id="admission_date" name="admission_date" class="form-control" placeholder="YYYY-MM-DD">
-            </div>  
+                <input type="text" id="admission_date" name="admission_date" class="form-control" placeholder="DD/MM/YYYY">
+            </div>
         </div>
 
 
@@ -42,11 +44,12 @@
             </div>
 
             <div class="form-group col-6">
-                <label class="control-label" for="patient_status">Status</label>
+                <label class="control-label" for="patient_status">Gender</label>
                 <select id="patient_status" name="patient_status" class="form-select form-control">
                     <option hidden>Choose one</option>
-                    <option value="normal">Normal</option>
-                    <option value="warning">Warning</option>
+                    <option value="normal">Male</option>
+                    <option value="warning">Female</option>
+                    <option value="warning">Other</option>
                 </select>
             </div>
         </div>
