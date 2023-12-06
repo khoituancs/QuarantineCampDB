@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS public.manager
 
 CREATE TABLE IF NOT EXISTS public.patient
 (
-    patient_number integer NOT NULL,
+    patient_number serial,
     identity_number character varying(10) COLLATE pg_catalog."default",
     fullname character varying(20) COLLATE pg_catalog."default" NOT NULL,
     phone character varying(10) COLLATE pg_catalog."default",
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS public.patient_comorbidity
 
 CREATE TABLE IF NOT EXISTS public.personnel
 (
-    unique_code integer NOT NULL,
+    unique_code serial,
     dob date NOT NULL,
     fullname character varying COLLATE pg_catalog."default" NOT NULL,
     phone character(10) COLLATE pg_catalog."default" NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS public.doctor
 
 CREATE TABLE IF NOT EXISTS public.testing
 (
-    test_id integer NOT NULL,
+    test_id serial,
     date date NOT NULL,
     "time" time without time zone NOT NULL,
     patient_number integer NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS public.respiratory_test
 
 CREATE TABLE IF NOT EXISTS public.building
 (
-    building_id integer NOT NULL,
+    building_id serial,
     PRIMARY KEY (building_id)
 );
 
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS public.take_care_of
 
 CREATE TABLE IF NOT EXISTS public.medication
 (
-    med_code integer NOT NULL,
+    med_code serial,
     expiration_date date,
     name character varying NOT NULL,
     price integer NOT NULL,

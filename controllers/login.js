@@ -1,4 +1,4 @@
-const path = "/DB";
+const path = "/QuarantineCampDB";
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("showPass").addEventListener("change", function() {
         var passwordInput = document.getElementById("password");
