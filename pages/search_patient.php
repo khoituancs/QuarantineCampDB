@@ -5,7 +5,7 @@
 ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script src="<?= $HTML_PATH ?>/controllers/search_patient.js"></script>
+<script src="<?= $HTML_PATH ?>/js/search_patient.js"></script>
 <div class="container">
     <link rel="stylesheet" href="<?= $HTML_PATH ?>/css/search_patient.css">
 
@@ -13,7 +13,7 @@
     <p class="description text-center">Look up patient information by filling out the following fields</p>
 
 
-    <form class="search-form container border border-dark rounded p-3" id="search_form" method="post" onsubmit="handle_query();return false;">
+    <form class="search-form container border border-dark rounded p-3" id="search-form" onsubmit="handle_query();return false;">
         <div class="row">
             <div class="form-group col-12">
                 <label class="control-label" for="full_name">Full name</label>

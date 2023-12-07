@@ -3,9 +3,9 @@ function handle_query() {
     document.getElementById("loading").style.display = "block";
     // var query = document.getElementById('products').value;
     // If validation succeeds, allow the form to submit via AJAX
-    var formData = new FormData(document.getElementById('search_form')); // change to form id
+    var formData = new FormData(document.getElementById('search-form')); // change to form id
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', path+'/services/dbconnect.php', true);
+    xhr.open('POST', path+'/services/search_processing.php', true);
     xhr.withCredentials = true;
 
     xhr.onreadystatechange = function () {
@@ -23,5 +23,7 @@ function handle_query() {
 $( function() {
     $( "#admission_date" ).datepicker({
         dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
     });
 } );
