@@ -10,32 +10,6 @@ const myToast = bootstrap.Toast.getInstance(myToastEl);
 const myToastEl2 = document.getElementById('failedToast');
 const myToast2 = bootstrap.Toast.getInstance(myToastEl2);
 
-
-function handle_insert() {
-    // var query = document.getElementById('products').value;
-    // If validation succeeds, allow the form to submit via AJAX
-    var formData = new FormData(document.getElementById('insert-form')); // change to form id
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', path+'/services/insert_processing.php', true);
-    xhr.withCredentials = true;
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                if(xhr.responseText == "Success"){
-                    myToast.show();
-                }
-                else{
-                    console.log(xhr.responseText);
-                    myToast2.show();
-                }
-            }
-        }
-        //console.log(xhr.responseText);
-    };
-    xhr.send(formData);
-}
-
 $( function() {
     $( "#admission_date" ).datepicker({
         dateFormat: 'dd/mm/yy',
@@ -182,4 +156,80 @@ function populateSelectOptionsBuilding(selectId, hiddenInputId, data) {
     select.addEventListener("change", function () {
         hiddenInput.value = this.value;
     });
+}
+
+function addComorbidities() {
+    const box = document.querySelector(".comorbidities-inputs");
+
+    // Create a new textarea element
+    const newTextarea = document.createElement('textarea');
+    newTextarea.id = 'comorbidities';
+    newTextarea.name = 'comorbidities';
+    newTextarea.className = 'form-control my-1';
+    newTextarea.rows = 1;
+    newTextarea.placeholder = 'Write the comorbidity';
+    newTextarea.required = true;
+    
+    // Append the new textarea element to the container
+    box.appendChild(newTextarea)
+}
+
+function removeComorbidities() {
+    var boxContainer = document.querySelector(".comorbidities-inputs");
+    var boxes = boxContainer.querySelectorAll("textarea");
+    if (boxes.length > 1) {
+        boxContainer.removeChild(boxes[boxes.length - 1])
+    }
+}
+
+function handle_insert() {
+    // Create an object to hold your form data
+    var formData = {
+        // Add other form fields here
+        full_name: document.getElementById('full_name').value,
+        gender: document.getElementById('gender').value,
+        identity_number: document.getElementById("identity_number").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value,
+        last_location: document.getElementById("last_location").value,
+        admission_date: document.getElementById("admission_date").value,
+        admitting_staff_code: document.getElementById("admitting_staff_code").value,
+        nurse_code: document.getElementById("nurse_code").value,
+        room_number: document.getElementById("room_number").value,
+        floor_number: document.getElementById("floor_number").value,
+        building_number: document.getElementById("building_number").value,
+
+        // Handle the comorbidities textareas
+        comorbidities: []
+    };
+
+    // Iterate over all comorbidities textareas and add their values to the array
+    document.querySelectorAll('textarea[name^="comorbidities"]').forEach(function(textarea) {
+        formData.comorbidities.push(textarea.value);
+    });
+
+    // Convert the object to JSON
+    var jsonData = JSON.stringify(formData);
+
+    // Send the JSON data via AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', path+'/services/insert_processing.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/json'); // Set the content type to JSON
+    xhr.withCredentials = true;
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                if(xhr.responseText == "Success"){
+                    myToast.show();
+                }
+                else{
+                    console.log(xhr.responseText);
+                    myToast2.show();
+                }
+            }
+        }
+    };
+
+    xhr.send(jsonData);
 }

@@ -15,7 +15,7 @@
         <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-        Update successfully.
+        Insert successfully.
     </div>
   </div>
 </div>
@@ -26,7 +26,7 @@
         <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
-        Update failed.
+        Insert failed.
     </div>
   </div>
 </div>
@@ -58,12 +58,12 @@
             <div class="form-group col-6">
                 <label class="control-label" for="identity_number">Identity number</label>
                 <input type="text" id="identity_number" name="identity_number" class="form-control"
-                pattern="[0-9]" placeholder="xxxxxxxxxxxx" required>
+                placeholder="xxxxxxxxxxxx" required>
             </div>
             <div class="form-group col-6">
                 <label class="control-label" for="phone">Phone number</label>
                 <input type="tel" id="phone" name="phone" class="form-control"
-                pattern="[0-9]" placeholder="090955789" required>
+                placeholder="090955789" required>
             </div>
         </div>
 
@@ -133,10 +133,12 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-12">
+            <div class="form-group col-12 comorbidities-inputs">
                 <label class="control-label" for="comorbidities">Comorbidities</label>
-                <textarea id="comorbidities" name="comorbidities" class="form-control" rows="3" 
-                placeholder="Write the comorbidities seperated by comma" required></textarea>
+                <button class="btn btn-add px-2 m-1" onclick="addComorbidities()">Add</button>
+                <button class="btn btn-remove px-2 m-1" onclick="removeComorbidities()">Remove</button>
+                <textarea id="comorbidities" name="comorbidities" class="form-control my-1" rows="1" 
+                placeholder="Write the comorbidity" required></textarea>
             </div>
         </div>
 
