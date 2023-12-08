@@ -134,7 +134,7 @@ function view_testing($conn){
         echo '
                 <tr>
                     <td>'.$row["test_id"].'</td>
-                    <td>'.$row["date"].'</td>
+                    <td>'.(new DateTime($row["date"]))->format('d/m/Y').'</td>
                     <td>'.$row["time"].'</td>
                     <td>'.$row["quick_ct_value"].'</td>
                     <td>'.$row["quick_result"].'</td>
@@ -188,7 +188,7 @@ function view_testing($conn){
         echo '
                 <tr>
                     <td>'.$row["test_id"].'</td>
-                    <td>'.$row["date"].'</td>
+                    <td>'.(new DateTime($row["date"]))->format('d/m/Y').'</td>
                     <td>'.$row["time"].'</td>
                     <td>'.$row["pcr_ct_value"].'</td>
                     <td>'.$row["pcr_result"].'</td>
@@ -240,7 +240,7 @@ function view_testing($conn){
         echo '
                 <tr>
                     <td>'.$row["test_id"].'</td>
-                    <td>'.$row["date"].'</td>
+                    <td>'.(new DateTime($row["date"]))->format('d/m/Y').'</td>
                     <td>'.$row["time"].'</td>
                     <td>'.$row["blood_oxygen_level"].'</td>
                 </tr>
@@ -291,7 +291,7 @@ function view_testing($conn){
         echo '
                 <tr>
                     <td>'.$row["test_id"].'</td>
-                    <td>'.$row["date"].'</td>
+                    <td>'.(new DateTime($row["date"]))->format('d/m/Y').'</td>
                     <td>'.$row["time"].'</td>
                     <td>'.$row["breaths_per_minute"].'</td>
                 </tr>
@@ -399,7 +399,7 @@ function view_all($conn){
             <div class="row">
                 <label for="sym_date_time" class="col-lg-4 col-form-label form-size small">Date time</label>
                 <div class="col-lg-8 align-self-center">
-                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_date_time" value="'.$row["date_time"].'">
+                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_date_time" value="'.(new DateTime($row["date_time"]))->format('H:i:s d/m/Y').'">
                 </div>
             </div>
         </div>
@@ -451,7 +451,7 @@ function view_all($conn){
                 <div class="row">
                     <label for="treat_start_date" class="col-lg-4 col-form-label form-size small">Start date</label>
                     <div class="col-lg-8 align-self-center">
-                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_start_date" value="'.$row["start_date"].'">
+                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_start_date" value="'.(new DateTime($row["start_date"]))->format('d/m/Y').'">
                     </div>
                 </div>
             </div>
@@ -459,7 +459,7 @@ function view_all($conn){
                 <div class="row">
                     <label for="treat_end_date" class="col-lg-4 col-form-label form-size small">End date</label>
                     <div class="col-lg-8 align-self-center">
-                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_end_date" value="'.$row["end_date"].'">
+                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_end_date" value="'.(new DateTime($row["end_date"]))->format('d/m/Y').'">
                     </div>
                 </div>
             </div>
