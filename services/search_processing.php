@@ -16,30 +16,33 @@
         "gender" => 1
     ];
     $query_str = "SELECT * FROM patient JOIN admit ON patient.patient_number = admit.patient_number WHERE ";
-    // foreach(array_keys($params) as $key){
-    //     if (isset($_POST[$key])){
-    //         if ($_POST[$key] || $_POST[$key]==='0') {
-    //             if ($params[$key]) {
-    //                 // Parameters of type varchar, char, date, ... should be put in quotes
-    //                 $query_str .= sprintf("(%s LIKE '%%%s%%') AND ", $key, mysqli_real_escape_string($conn, $_POST[$key]));
-    //             } else {
-    //                 $query_str .= sprintf("(%s LIKE %%%s%%) AND ", $key, mysqli_real_escape_string($conn, $_POST[$key]));
-    //             }
-    //         }                        
-    //     }
-    // }
+    
     foreach(array_keys($params) as $key){
         if (isset($_POST[$key])){
             if ($_POST[$key] || $_POST[$key]==='0') {
                 if ($params[$key]) {
                     // Parameters of type varchar, char, date, ... should be put in quotes
-                    $query_str .= sprintf("%s LIKE '%%%s%%' AND ", $key,$_POST[$key]);
+                    $query_str .= sprintf("(%s LIKE '%%%s%%') AND ", $key, pg_escape_string($conn, $_POST[$key]));
                 } else {
-                    $query_str .= sprintf("%s LIKE %%%s%% AND ", $key,$_POST[$key]);
+                    $query_str .= sprintf("%s LIKE %%%s%% AND ", $key, pg_escape_string($conn, $_POST[$key]));
                 }
             }                        
         }
     }
+    
+    // foreach(array_keys($params) as $key){
+    //     if (isset($_POST[$key])){
+    //         if ($_POST[$key] || $_POST[$key]==='0') {
+    //             if ($params[$key]) {
+    //                 // Parameters of type varchar, char, date, ... should be put in quotes
+    //                 $query_str .= sprintf("%s LIKE '%%%s%%' AND ", $key,$_POST[$key]);
+    //             } else {
+    //                 $query_str .= sprintf("%s LIKE %%%s%% AND ", $key,$_POST[$key]);
+    //             }
+    //         }                        
+    //     }
+    // }
+
     if (strlen($query_str) == 165){
         //no condition added to the query
         echo '<span style="color: red;">Please provide at least one parameter to identify the patient.</span>';
