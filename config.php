@@ -6,5 +6,5 @@
     $port = "5432";
     $username = "stuti2309";
     $password = "stuti2309";
-    $dbname = "QuarantineCampDB";
+    $dbname = "QuarantineCampDB"; // ="qc";
 ?>

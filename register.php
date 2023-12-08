@@ -10,8 +10,9 @@
         die("Connection failed: " . pg_last_error());
     }
 
-    $manager_code = 2;
-    $username = "stuti@gmail.com";
+    $manager_code = 1;
+    //stuti@gmail.com
+    $username = "nct2309@gmail.com";
     $password = password_hash("123456", PASSWORD_DEFAULT);
 
     $query = "INSERT INTO public.mgr_authentication VALUES ($1, $2, $3)";

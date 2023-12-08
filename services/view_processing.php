@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo'
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 Testing
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo'
             <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 Full Information
@@ -76,10 +76,10 @@ function view_testing($conn){
     echo'
 <div class="row mb-3 justify-content-center">
     <div class="my-3 row">
-        <div class="col-lg-12">
+        <div class="col-12">
             <div class="row">
-                <label for="test_pat_name" class="col-lg-2 col-form-label form-size">Patient Name</label>
-                <div class="col-lg-10 align-self-center">
+                <label for="test_pat_name" class="col-2 col-form-label form-size">Patient Name</label>
+                <div class="col-10 align-self-center">
                     <input type="text" readonly class="form-control border-1" style="width: 100%;" id="test_pat_name" value="'.$row["fullname"].'">
                 </div>
             </div>
@@ -317,25 +317,25 @@ function view_all($conn){
     $row = pg_fetch_assoc($result);
     echo'
     <div class="my-3 row">
-        <div class="col-lg-6">
+        <div class="col-6">
             <label for="fullname" class="form-label form-size fw-bold">Full Name</label>
             <input type="text" readonly class="form-control border-1" id="fullname" value="'.$row["fullname"].'">
         </div>
-        <div class="col-lg-6">
+        <div class="col-6">
             <label for="id_number" class="form-label form-size fw-bold">Identity Number</label>
             <input type="text" readonly class="form-control border-1" id="id_number" value="'.$row["identity_number"].'">
         </div>
     </div>
     <div class="mb-3 row">
-        <div class="col-lg-4">
+        <div class="col-4">
             <label for="gender" class="form-label form-size small fw-bold">Gender</label>
             <input type="text" readonly class="form-control-sm border-1" id="gender" value="'.$row["gender"].'">
         </div>
-        <div class="col-lg-4">
+        <div class="col-4">
             <label for="phone" class="form-label form-size fw-bold small">Phone</label>
             <input type="text" readonly class="form-control-sm border-1" id="phone" value="'.$row["phone"].'">
         </div>
-        <div class="col-lg-4">
+        <div class="col-4">
             <label for="address" class="form-label form-size fw-bold small">Address</label>
             <input type="text" readonly class="form-control-sm border-1" id="address" value="'.$row["address"].'">
         </div>
@@ -348,7 +348,7 @@ function view_all($conn){
         patient_comorbidity.comorbidity
     FROM
         patient
-    LEFT JOIN
+    INNER JOIN
         patient_comorbidity ON patient.patient_number = patient_comorbidity.patient_number
     WHERE
         patient.patient_number = '.$_POST["patient_id"].';
@@ -358,16 +358,22 @@ function view_all($conn){
     if (!$result) {
         die("Error in SQL query: " . pg_last_error());
     }
-    while ($row = pg_fetch_assoc($result)) {
     echo'
     <div class="mb-3 row">
-        <label for="comorbidity" class="col-lg-2 col-form-label form-size fw-bold">Comorbidity</label>
-        <div class="col-lg-10 align-self-center">
-            <input type="text" readonly class="form-control-sm border-1" id="comorbidity" style="width: 100%;" value="'.$row["comorbidity"].'">
+    <div class="fw-bold">Comorbidity</div>
+    ';
+    while ($row = pg_fetch_assoc( $result)) {
+    echo'
+        <div class="row mb-2">
+            <div class="col-lg-12 order-lg-2 align-self-center">
+                <input type="text" readonly class="form-control-sm border-1" id="comorbidity" style="width: 100%;" value="'.$row["comorbidity"].'">
+            </div>
         </div>
-    </div>
     ';
     }
+    echo'
+    </div>
+    ';
     
     $query_sym='
     SELECT
@@ -376,7 +382,7 @@ function view_all($conn){
         symptom.description
     FROM
         patient
-    LEFT JOIN
+    INNER JOIN
         symptom ON patient.patient_number = symptom.patient_number
     WHERE
         patient.patient_number = '.$_POST["patient_id"].';
@@ -385,16 +391,19 @@ function view_all($conn){
     // Check if the query was successful
     if (!$result) {
         die("Error in SQL query: " . pg_last_error());
+
     }
-    while ($row = pg_fetch_assoc($result)) {
     echo'
     <div class="mb-3 row">
         <div class="fw-bold">Symptoms</div>
+    ';
+    while ($row = pg_fetch_assoc($result)) {
+    echo'
         <div class="col-lg-auto ms-3">
             <div class="row">
                 <label for="sym_date_time" class="col-lg-4 col-form-label form-size small">Date time</label>
                 <div class="col-lg-8 align-self-center">
-                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_date_time" value="'.(new DateTime($row["date_time"]))->format('H:i:s d/m/Y').'">
+                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_date_time" value="'.(new DateTime($row['date_time']))->format('H:i:s d/m/Y').'">
                 </div>
             </div>
         </div>
@@ -402,13 +411,15 @@ function view_all($conn){
             <div class="row">
                 <label for="sym_desc" class="col-lg-2 col-form-label form-size small">Description</label>
                 <div class="col-lg-10 align-self-center">
-                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_desc" value="'.$row["description"].'">
+                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_desc" value="'.$row['description'].'">
                 </div>
             </div>
         </div>
-    </div>
     ';
     }
+    echo'
+    </div>
+    ';
 
     echo'
     <div class="mb-3 row">
@@ -427,7 +438,7 @@ function view_all($conn){
         treatment.result
     FROM
         patient
-    LEFT JOIN
+    INNER JOIN
         treatment ON patient.patient_number = treatment.patient_number
     WHERE
         patient.patient_number = '.$_POST["patient_id"].';
@@ -437,39 +448,67 @@ function view_all($conn){
     if (!$result) {
         die("Error in SQL query: " . pg_last_error());
     }
-    while ($row = pg_fetch_assoc($result)) {
+    $query_doctor="
+    SELECT
+        p.fullname
+    FROM
+        treat as t
+    JOIN 
+        doctor as d ON t.doctor_code = d.doctor_code
+    JOIN
+        personnel as p ON d.doctor_code = p.unique_code
+    WHERE 
+        t.patient_number = ".$_POST["patient_id"]." AND t.start_date = $1 AND t.end_date = $2;
+    ";
+    $res1 = pg_prepare($conn, "SELECT_DOCTOR", $query_doctor);
+    $query_med ='
+    SELECT
+        m.name
+    FROM
+        use as u
+    JOIN
+        medication as m ON u.med_code = m.med_code
+    WHERE
+        u.patient_number = '.$_POST["patient_id"].' AND u.start_date = $1 AND u.end_date = $2';
+
+    $res2 = pg_prepare($conn, "SELECT_MEDICATION", $query_med);
     echo '
-    <div class="row">
-        <div class="fw-bold">Treatment</div>
-        <div class="row mb-2">
-            <div class="col-lg-auto ms-3">
-                <div class="row">
-                    <label for="treat_start_date" class="col-lg-4 col-form-label form-size small">Start date</label>
-                    <div class="col-lg-8 align-self-center">
-                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_start_date" value="'.(new DateTime($row["start_date"] ))->format('d/m/Y').'">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-auto">
-                <div class="row">
-                    <label for="treat_end_date" class="col-lg-4 col-form-label form-size small">End date</label>
-                    <div class="col-lg-8 align-self-center">
-                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_end_date" value="'.(new DateTime($row["end_date"] ))->format('d/m/Y').'">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-auto">
-                <div class="row">
-                    <label for="treat_result" class="col-lg-auto col-form-label form-size small">Result</label>
-                    <div class="col-lg-auto align-self-center">
-                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_result" value="'.$row["result"].'">
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="container-fluid table-responsive" id="">
+        <table class="table table-light table-striped table-hover table-bordered">
+        <caption class="caption-top">Treatments</caption>
+            <thead>
+                <tr>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Doctor(s)</th>
+                    <th>Medication</th>
+                    <th>Resultt</th>
+                </tr>
+            </thead>
+            <tbody>
+    ';
+    while ($row = pg_fetch_assoc($result)) {
+        $res1 = pg_execute($conn, "SELECT_DOCTOR", array($row["start_date"], $row["end_date"]));
+        $res2 = pg_execute($conn, "SELECT_MEDICATION", array($row["start_date"], $row["end_date"]));
+        echo '
+                <tr>
+                    <td>'.(new DateTime($row["start_date"]))->format('d/m/Y').'</td>
+                    <td>'.(new DateTime($row["end_date"]))->format('d/m/Y').'</td>
+                    <td>'.implode(", ", array_map(function($row) {
+                        return $row["fullname"];
+                    }, pg_fetch_all($res1))).'</td>
+                    <td>'.implode(", ", array_map(function($row) {
+                        return $row["name"];
+                    }, pg_fetch_all($res2))).'</td>
+                    <td>'.$row["result"].'</td>
+                </tr>
+        ';
+    }
+    echo'
+            </tbody>
+        </table>
     </div>
     ';
-    }
 }
 
 // close conn db
