@@ -3,12 +3,11 @@
     session_start();
     include_once ("../config.php");
 
-    // Create a connection to the MySQL server
-    $conn = new mysqli($servername, $username, $password, $database);
+    $conn = pg_connect("host=$host port=$port user=$username password=$password dbname=$dbname");
 
-    // Check the connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    // Check if the connection is successful
+    if (!$conn) {
+        die("Connection failed: " . pg_last_error());
     }
 
     function isEmailValid($email) {
@@ -24,26 +23,32 @@
                 echo '<span style="color: red;"> Username must be an email.</span>';
                 exit;
             }
+
             $password = $_POST["password"];
-            $sql="SELECT * FROM users WHERE username = '$email'";
-            $result = $conn->query($sql);
-            if ($result->num_rows === 1) {
+
+            // $sql="SELECT * FROM public.mgr_authentication WHERE username = '$email' AND password = '$password'";
+            // $result = pg_query($conn, $sql);
+
+            $query = "SELECT * FROM public.mgr_authentication WHERE username = $1";
+            $result = pg_prepare($conn, "SELECT_USER", $query);
+            $result = pg_execute($conn, "SELECT_USER", array($email));
+
+            if (pg_numrows($result) === 1) {
                 // Output data for each row
-                $row = $result->fetch_assoc();
+                $row = pg_fetch_assoc($result);
                 if (password_verify($password, $row['password'])) {
-                    $user_id = "user_id";
-                    $user_id_val = $row['userID'];
-                    $username = "username";
+
+                    $user_id_val = $row['manager_code'];
                     $username_val = $row['username'];
-                    $user_level = "user_level";
-                    $user_level_val = $row['level'];
+
                     $expirationTime = time() + 3600; // 1 hour from now
-                    setcookie($user_id, $user_id_val, $expirationTime);
-                    setcookie($username, $username_val, $expirationTime);
-                    setcookie($user_level, $user_level_val, $expirationTime);
+                    setcookie("user_id", $user_id_val, $expirationTime);
+                    setcookie("username", $username_val, $expirationTime);
+
                     $_SESSION['user_id']=$user_id_val;
                     $_SESSION['username']=$username_val;
-                    $_SESSION['user_level']=$user_level_val;
+
+
                     header('Content-Type: text/plain');
                     echo 'Login successful!';
                 } else {
@@ -63,5 +68,5 @@
     }
 
     // Close the MySQL connection
-    $conn->close();
+    pg_close($conn);
 ?>

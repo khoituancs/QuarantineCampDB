@@ -5,7 +5,7 @@
 ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script src="<?= $HTML_PATH ?>/controllers/search.js"></script>
+<script src="<?= $HTML_PATH ?>/js/search_patient.js"></script>
 <div class="container">
     <link rel="stylesheet" href="<?= $HTML_PATH ?>/css/search_patient.css">
 

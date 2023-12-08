@@ -49,7 +49,6 @@
                                         <div class="ms-3" style="color: #7f181b;">
                                             User ID: '. $_SESSION['user_id'] . ' <br>
                                             Username: '. $_SESSION['username'] .' <br>
-                                            User Level: '. $_SESSION['user_level'].'
                                         </div>
                                     </li>
                                 </ul>
