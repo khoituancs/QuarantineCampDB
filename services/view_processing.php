@@ -353,7 +353,7 @@ function view_all($conn){
         patient_comorbidity.comorbidity
     FROM
         patient
-    LEFT JOIN
+    INNER JOIN
         patient_comorbidity ON patient.patient_number = patient_comorbidity.patient_number
     WHERE
         patient.patient_number = '.$_POST["patient_id"].';
@@ -363,16 +363,22 @@ function view_all($conn){
     if (!$result) {
         die("Error in SQL query: " . $conn->error);
     }
-    while ($row = $result->fetch_assoc()) {
     echo'
     <div class="mb-3 row">
-        <label for="comorbidity" class="col-lg-2 col-form-label form-size fw-bold">Comorbidity</label>
-        <div class="col-lg-10 align-self-center">
-            <input type="text" readonly class="form-control-sm border-1" id="comorbidity" style="width: 100%;" value="'.$row["comorbidity"].'">
+    <div class="fw-bold">Comorbidity</div>
+    ';
+    while ($row = $result->fetch_assoc()) {
+    echo'
+        <div class="row mb-2">
+            <div class="col-lg-12 order-lg-2 align-self-center">
+                <input type="text" readonly class="form-control-sm border-1" id="comorbidity" style="width: 100%;" value="'.$row["comorbidity"].'">
+            </div>
         </div>
-    </div>
     ';
     }
+    echo'
+    </div>
+    ';
     
     $query_sym='
     SELECT
@@ -381,7 +387,7 @@ function view_all($conn){
         symptom.description
     FROM
         patient
-    LEFT JOIN
+    INNER JOIN
         symptom ON patient.patient_number = symptom.patient_number
     WHERE
         patient.patient_number = '.$_POST["patient_id"].';
@@ -391,15 +397,18 @@ function view_all($conn){
     if (!$result) {
         die("Error in SQL query: " . $conn->error);
     }
-    while ($row = $result->fetch_assoc()) {
+
     echo'
     <div class="mb-3 row">
         <div class="fw-bold">Symptoms</div>
+    ';
+    while ($row = $result->fetch_assoc()) {
+    echo'
         <div class="col-lg-auto ms-3">
             <div class="row">
                 <label for="sym_date_time" class="col-lg-4 col-form-label form-size small">Date time</label>
                 <div class="col-lg-8 align-self-center">
-                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_date_time" value="'.(new DateTime($row["date_time"]))->format('H:i:s d/m/Y').'">
+                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_date_time" value="'.(new DateTime($row['date_time']))->format('H:i:s d/m/Y').'">
                 </div>
             </div>
         </div>
@@ -407,13 +416,15 @@ function view_all($conn){
             <div class="row">
                 <label for="sym_desc" class="col-lg-2 col-form-label form-size small">Description</label>
                 <div class="col-lg-10 align-self-center">
-                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_desc" value="'.$row["description"].'">
+                    <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="sym_desc" value="'.$row['description'].'">
                 </div>
             </div>
         </div>
-    </div>
     ';
     }
+    echo'
+    </div>
+    ';
 
     echo'
     <div class="mb-3 row">
@@ -432,7 +443,7 @@ function view_all($conn){
         treatment.result
     FROM
         patient
-    LEFT JOIN
+    INNER JOIN
         treatment ON patient.patient_number = treatment.patient_number
     WHERE
         patient.patient_number = '.$_POST["patient_id"].';
@@ -442,39 +453,91 @@ function view_all($conn){
     if (!$result) {
         die("Error in SQL query: " . $conn->error);
     }
-    while ($row = $result->fetch_assoc()) {
-    echo '
+
+    echo'
     <div class="row">
-        <div class="fw-bold">Treatment</div>
-        <div class="row mb-2">
-            <div class="col-lg-auto ms-3">
-                <div class="row">
-                    <label for="treat_start_date" class="col-lg-4 col-form-label form-size small">Start date</label>
-                    <div class="col-lg-8 align-self-center">
-                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_start_date" value="'.(new DateTime($row["start_date"]))->format('d/m/Y').'">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-auto">
-                <div class="row">
-                    <label for="treat_end_date" class="col-lg-4 col-form-label form-size small">End date</label>
-                    <div class="col-lg-8 align-self-center">
-                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_end_date" value="'.(new DateTime($row["end_date"]))->format('d/m/Y').'">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-auto">
-                <div class="row">
-                    <label for="treat_result" class="col-lg-auto col-form-label form-size small">Result</label>
-                    <div class="col-lg-auto align-self-center">
-                        <input type="text" readonly class="form-control-sm border-1" style="width: 100%;" id="treat_result" value="'.$row["result"].'">
-                    </div>
-                </div>
-            </div>
-        </div>
+    ';
+
+    // doctor
+    $query_doctor = "
+    SELECT
+        p.fullname
+    FROM
+        treat as t
+    JOIN 
+        doctor as d ON t.doctor_code = d.doctor_code
+    JOIN
+        personnel as p ON d.doctor_code = p.unique_code
+    WHERE 
+        t.patient_number = ? AND t.start_date = ? AND t.end_date = ?;
+    ";
+
+    $stmt_doctor = $conn->prepare($query_doctor);
+
+    $query_med = "
+        SELECT
+            m.name
+        FROM
+            use_medication as u
+        JOIN
+            medication as m ON u.med_code = m.med_code
+        WHERE
+            u.patient_number = ? AND u.start_date = ? AND u.end_date = ?;
+    ";
+
+    $stmt_medication = $conn->prepare($query_med);
+
+    echo '
+    <div class="container-fluid table-responsive" id="">
+        <table class="table table-light table-striped table-hover table-bordered">
+        <caption class="caption-top">Treatments</caption>
+            <thead>
+                <tr>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Doctor(s)</th>
+                    <th>Medication</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+    ';
+    $result->data_seek(0);
+    while ($row = $result->fetch_assoc()) {
+        $stmt_doctor->bind_param("iss", $_POST["patient_id"], $row["start_date"], $row["end_date"]);
+        $stmt_doctor->execute();
+        $res1 = $stmt_doctor->get_result();
+
+        $stmt_medication->bind_param("iss", $_POST["patient_id"], $row["start_date"], $row["end_date"]);
+        $stmt_medication->execute();
+        $res2 = $stmt_medication->get_result();
+
+        echo '
+            <tr>
+                <td>'.(new DateTime($row["start_date"]))->format('d/m/Y').'</td>
+                <td>'.(new DateTime($row["end_date"]))->format('d/m/Y').'</td>
+                <td>'.implode(", ", array_map(function($row) {
+                    return $row["fullname"];
+                }, $res1->fetch_all(MYSQLI_ASSOC))).'</td>
+                <td>'.implode(", ", array_map(function($row) {
+                    return $row["name"];
+                }, $res2->fetch_all(MYSQLI_ASSOC))).'</td>
+                <td>'.$row["result"].'</td>
+            </tr>
+        ';
+    }
+
+    echo '
+            </tbody>
+        </table>
     </div>
     ';
-    }
+    // Close the prepared statements
+    $stmt_doctor->close();
+    $stmt_medication->close();
+    echo'
+    </div>
+    ';
 }
 
 // close conn db
