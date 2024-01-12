@@ -1,0 +1,55 @@
+.first-class {
+font-family: Tahoma, Geneva, Verdana, sans-serif;
+letter-spacing:8px;
+padding-top: 6px;
+padding-bottom: 1px;
+}
+.first-class a{
+    color: #fff;
+    text-decoration: none;
+}
+.second-class a{
+    color: #e6e6e6;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.second-class a:hover {
+    color: white;
+}
+.test{
+    list-style-type:none;
+    display:flex;
+}
+.test li{
+    margin-right:20px;
+}
+.button-login {
+background-color: #7f181b; /* Set the background color of the button */
+color: #fff; /* Set the text color of the button */
+padding: 5px 10px; /* Add padding to the button for better appearance */
+border: none; /* Remove the default border */
+border-radius: 5px; /* Optional: Add rounded corners */
+cursor: pointer; /* Change the cursor to a pointer on hover */
+transition: background-color 0.3s;
+}
+.button-login:hover {
+background-color: #ed1b2e;
+}
+.button-signup{
+background-color: transparent; /* Set the background color of the button */
+color: #7f181b; /* Set the text color of the button */
+padding: 5px 10px; /* Add padding to the button for better appearance */
+border: 1px solid #7f181b; /* Inner border color */
+border-radius: 5px; /* Adjust as needed */
+cursor: pointer; /* Change the cursor to a pointer on hover */
+transition: background-color 0.3s;
+}
+.button-signup:hover {
+color: #ed1b2e;
+border: 1px solid #ed1b2e;
+}
+
+.user{
+    color: #ed1b2e;
+    background-color: transparent;
+}
